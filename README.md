@@ -23,6 +23,12 @@ A native macOS clipboard manager built in Swift (SwiftUI + AppKit + SwiftData).
   <img src="Resources/clipfield-demo.gif" alt="Clipfield demo" width="100%">
 </p>
 
+<p align="center">
+  <a href="https://buymeacoffee.com/jolley">
+    <img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy me a coffee">
+  </a>
+</p>
+
 ## Requirements
 
 - macOS 14 (Sonoma) or later.
