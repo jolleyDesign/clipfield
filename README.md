@@ -25,7 +25,7 @@ A native macOS clipboard manager built in Swift (SwiftUI + AppKit + SwiftData).
 
 <p align="center">
   <a href="https://buymeacoffee.com/jolley">
-    <img src="https://img.shields.io/badge/Buy%20me%20a%20coffee-FFDD00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="Buy me a coffee">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee" height="60" width="217">
   </a>
 </p>
 
