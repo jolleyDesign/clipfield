@@ -1,0 +1,27 @@
+# Swift Package Manager build output
+.build/
+.swiftpm/
+Package.resolved
+
+# Built app bundle & release artifacts
+Clipfield.app/
+*.dmg
+
+# Xcode (if you ever open the package in Xcode)
+*.xcodeproj/
+*.xcworkspace/
+xcuserdata/
+DerivedData/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# Editor / misc
+*.swp
+*~
+.idea/
+.vscode/

@@ -28,11 +28,6 @@ final class PermissionsState: ObservableObject {
         if trusted && !wasTrusted { onBecameTrusted?() }
     }
 
-    func stop() {
-        timer?.invalidate()
-        timer = nil
-    }
-
     /// Opens System Settings → Privacy & Security → Accessibility, and triggers
     /// the system prompt so the app is added to the list.
     func requestAccessibility() {

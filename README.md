@@ -49,16 +49,6 @@ across rebuilds).
 use). Shipping to other Macs without Gatekeeper warnings requires signing + notarizing with an
 **Apple Developer ID** — the script prints the exact `codesign` / `notarytool` / `stapler` steps.
 
-## Not yet implemented (need an Apple Developer account)
-
-These were scoped but require a signed app with proper entitlements, so they aren't wired up in
-the local ad-hoc build:
-
-- **iCloud sync** — SwiftData + CloudKit needs an iCloud container entitlement and a
-  Developer Team signature. (CloudKit also disallows `@Attribute(.unique)`, so `ClipItem.id` /
-  `Folder.id` / `Snippet.id` would need their unique constraints removed.)
-- **Auto-update (Sparkle)** — needs a signed app + a hosted appcast feed.
-
 ## Encryption at rest
 
 Turn on **Settings → Security → “Encrypt clipboard data at rest.”** When enabled, the sensitive
@@ -95,13 +85,33 @@ encryption only**, not a cross-device feature.
 
 ```
 Sources/Clipfield/
-  App/        @main app, AppDelegate (wiring), launch-at-login
-  Models/     SwiftData models (ClipItem, Folder) + ClipKind / SmartTag enums
-  Storage/    ModelContainer + HistoryStore (dedup, retention, clear)
-  Clipboard/  changeCount poller, pasteboard read/write, auto-paster
-  Tagging/    on-device smart tagger (NSDataDetector + regex + NaturalLanguage)
+  App/        @main app, AppDelegate (wiring), launch-at-login, permission state
+  Models/     SwiftData models (ClipItem, Folder, Snippet) + ClipKind / SmartTag enums
+  Storage/    ModelContainer + HistoryStore (dedup, retention, clear), CryptoVault, sample data
+  Clipboard/  changeCount poller, pasteboard read/write, all-flavor capture, auto-paster
+  Tagging/    on-device smart tagger (NSDataDetector + regex + NaturalLanguage), text transforms
   Search/     tag-aware search engine
   Hotkeys/    Carbon global hotkey + persisted binding
   Privacy/    per-app exclusions
-  UI/         menu-bar view, Settings, and the overlay (panel/controller/view/row/search field)
+  UI/         Theme, Settings, and the overlay (panel/controller/view/rows/preview/search field)
 ```
+
+## Contributing
+
+Contributions are welcome! See **[CONTRIBUTING.md](CONTRIBUTING.md)** for setup,
+a tour of the architecture and data flow, coding conventions, and common
+extension points (adding a smart tag, a text transform, or a setting).
+
+In short:
+
+```sh
+DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer" swift build   # compile
+./build_app.sh && open ./Clipfield.app                                   # build + run
+```
+
+Everything stays on-device — please keep it that way (no network, analytics, or
+telemetry).
+
+## License
+
+Clipfield is released under the [MIT License](LICENSE).

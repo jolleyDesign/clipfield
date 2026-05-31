@@ -77,6 +77,9 @@ struct OverlayView: View {
         self.onClose = onClose
     }
 
+    /// Which sidebar section is showing: all clips, pinned only, the snippets
+    /// library, or a specific user folder. Drives `scopedItems` and the sidebar
+    /// selection highlight.
     enum Scope: Hashable {
         case all, pinned, snippets, folder(PersistentIdentifier)
     }
@@ -417,8 +420,7 @@ struct OverlayView: View {
     private func sidebarRow(title: String, systemImage: String, scopeValue: Scope, count: Int? = nil) -> some View {
         let active = scope == scopeValue
         return Button {
-            withAnimation(Theme.selectionSpring) { scope = scopeValue }
-            selectedIndex = 0
+            setScope(scopeValue)
         } label: {
             HStack(spacing: 9) {
                 Image(systemName: systemImage)
@@ -638,7 +640,7 @@ struct OverlayView: View {
             Button {
                 withAnimation(Theme.selectionSpring) { sidebarCollapsed.toggle() }
             } label: {
-                Image(systemName: sidebarCollapsed ? "sidebar.left" : "sidebar.left")
+                Image(systemName: "sidebar.left")
                     .foregroundStyle(sidebarCollapsed ? Color.secondary : Color.accentColor)
             }
             .buttonStyle(.borderless)
@@ -682,7 +684,7 @@ struct OverlayView: View {
                 .font(.caption2.monospacedDigit())
                 .foregroundStyle(.tertiary)
             Button {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { showShortcuts.toggle() }
+                withAnimation(Theme.promptSpring) { showShortcuts.toggle() }
             } label: {
                 Image(systemName: "keyboard")
             }
@@ -988,7 +990,7 @@ struct OverlayView: View {
         guard let text = item.text else { return }
         editingText = text
         editingIsCode = (item.kind == .code)
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { showEditor = true }
+        withAnimation(Theme.promptSpring) { showEditor = true }
     }
 
     private func commitEdited() {
@@ -1016,7 +1018,7 @@ struct OverlayView: View {
 
     private func presentNewFolder() {
         newFolderName = ""
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+        withAnimation(Theme.promptSpring) {
             showNewFolderPrompt = true
         }
     }
@@ -1055,7 +1057,7 @@ struct OverlayView: View {
         } else {
             fillSnippet = snippet
             fillValues = Dictionary(uniqueKeysWithValues: snippet.placeholders.map { ($0, "") })
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { showFillPrompt = true }
+            withAnimation(Theme.promptSpring) { showFillPrompt = true }
         }
     }
 
@@ -1070,7 +1072,7 @@ struct OverlayView: View {
         editingSnippet = snippet
         snippetTitle = snippet?.title ?? ""
         snippetContent = snippet?.content ?? ""
-        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { showSnippetEditor = true }
+        withAnimation(Theme.promptSpring) { showSnippetEditor = true }
     }
 
     private func saveSnippet() {

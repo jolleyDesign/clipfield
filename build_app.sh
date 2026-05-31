@@ -46,7 +46,21 @@ for bundle in "$BUILD_DIR"/*.bundle; do
 done
 shopt -u nullglob
 
-echo "==> Ad-hoc code signing"
-codesign --force --deep --sign - "$APP"
+# Code signing. Defaults to ad-hoc ("-"), which keeps the Accessibility grant
+# stable across local rebuilds. For distribution, set SIGN_IDENTITY to a
+# "Developer ID Application: …" identity; that path also enables the hardened
+# runtime + secure timestamp, both required for notarization.
+SIGN_IDENTITY="${SIGN_IDENTITY:--}"
+
+if [[ "$SIGN_IDENTITY" == "-" ]]; then
+    echo "==> Ad-hoc code signing"
+    codesign --force --deep --sign - "$APP"
+else
+    echo "==> Code signing (hardened runtime): $SIGN_IDENTITY"
+    codesign --force --deep --options runtime --timestamp \
+        --sign "$SIGN_IDENTITY" "$APP"
+    echo "==> Verifying signature"
+    codesign --verify --strict --verbose=2 "$APP"
+fi
 
 echo "==> Done: $APP"

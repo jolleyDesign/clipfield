@@ -18,7 +18,9 @@ enum Theme {
 
     /// Spring used for selection movement and chip/sidebar highlights.
     static let selectionSpring = Animation.spring(response: 0.28, dampingFraction: 0.82)
-    static let appearSpring = Animation.spring(response: 0.34, dampingFraction: 0.82)
+    /// Spring used to present/toggle the overlay's inline prompts (editor, fill,
+    /// new-folder, snippet editor, shortcuts sheet).
+    static let promptSpring = Animation.spring(response: 0.3, dampingFraction: 0.8)
 }
 
 extension ClipKind {
