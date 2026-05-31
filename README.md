@@ -20,9 +20,7 @@ A native macOS clipboard manager built in Swift (SwiftUI + AppKit + SwiftData).
   256-bit key kept in the macOS Keychain. Toggle it in **Settings → Security**.
 
 <p align="center">
-  <video src="https://raw.githubusercontent.com/jolleyDesign/clipfield/main/Resources/clipfield-demo.webm" width="100%" autoplay loop muted playsinline controls>
-    <a href="https://raw.githubusercontent.com/jolleyDesign/clipfield/main/Resources/clipfield-demo.webm">Watch the Clipfield demo</a>
-  </video>
+  <img src="Resources/clipfield-demo.gif" alt="Clipfield demo" width="100%">
 </p>
 
 ## Requirements
