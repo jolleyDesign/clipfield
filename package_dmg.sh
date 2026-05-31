@@ -62,6 +62,12 @@ hdiutil create \
 
 rm -rf "$STAGING"
 
+# Sign the DMG itself (not just the app inside). Without this, `spctl` assesses
+# the DMG as "no usable signature" even after notarization, and the wrapper
+# carries no Developer ID origin. Signing must happen before notarization.
+echo "==> Signing DMG"
+codesign --force --sign "$SIGN_IDENTITY" --timestamp "$DMG"
+
 if [[ "${SKIP_NOTARIZE:-0}" == "1" ]]; then
     echo "==> SKIP_NOTARIZE=1 — signed but NOT notarized: $DMG"
     echo "    Recipients will hit a Gatekeeper prompt on first launch."
