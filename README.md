@@ -32,9 +32,6 @@ A native macOS clipboard manager built in Swift (SwiftUI + AppKit + SwiftData).
 ## Requirements
 
 - macOS 14 (Sonoma) or later.
-- **Full Xcode installed.** The build uses closed-source SwiftData / SwiftUI macro plugins
-  that ship only inside Xcode, not the standalone Command Line Tools. `build_app.sh` points
-  the build at `/Applications/Xcode.app` automatically.
 
 ## Build & run
 
