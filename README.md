@@ -34,6 +34,7 @@ A native macOS clipboard manager built in Swift (SwiftUI + AppKit + SwiftData).
 - macOS 14 (Sonoma) or later.
 
 ## Build & run
+If you'd rather build it yourself, follow these instructions. Otherwise, download the .DMG from the Releases section.
 
 ```sh
 ./build_app.sh            # release build → Clipfield.app (ad-hoc signed)
