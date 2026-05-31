@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="Resources/clipfield-banner.png" alt="Clipfield" width="100%">
+</p>
+
 # Clipfield
 
 A native macOS clipboard manager built in Swift (SwiftUI + AppKit + SwiftData).
